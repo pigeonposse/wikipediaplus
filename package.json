@@ -63,7 +63,7 @@
 	"@parcel/bundler-default": {
 		"minBundles": 10000000
 	},
-	"homepage": "https://pigeonposse.com/",
+	"homepage": "https://chrome.google.com/webstore/detail/wikipedia-%20/nnkleafalbcmeamobndfmcjhphipnnaj",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/pigeonposse/wikipediaplus"
