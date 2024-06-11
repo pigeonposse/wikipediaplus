@@ -16,12 +16,12 @@ module.exports = {
 			],
 		},
 	},
-	'git' : {
-		'requireBranch' : 'main',
-		'commitMessage' : 'Release v${version}',
-	},
+	// 'git' : {
+	// 	'requireBranch' : 'main',
+	// 	'commitMessage' : '👷 build(all): Release v${version}',
+	// },
 	'hooks' : {
-		'before:init'       : [ 'git push', 'pnpm lint-fix' ],
+		// 'before:init'       : [ 'git push', 'pnpm pes lint-fix' ],
 	    'after:bump'        : 'pnpm auto-changelog -p',
 	    'after:git:release' : 'echo \'After git push, before github release\'',
 	    'after:release'     : [

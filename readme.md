@@ -36,7 +36,7 @@ DEVELOPED BY PIGEONPOSSE
 
  -->
 
-# Wikipedia Plus _Browser extension_
+# Wikipedia Plus _Chrome, Safari & Browser Extension_
 
 ![HEADER Wikipedia Plus](docs/banner.png)
 
@@ -51,6 +51,7 @@ WikipediaPlus is the perfect tool to enhance your browsing experience on Wikiped
 
 - [![Firefox Extension](https://img.shields.io/badge/Firefox-grey?style=flat-square)](https://addons.mozilla.org/es/firefox/addon/wikipediaplus/)
 - [![Chrome Extension](https://img.shields.io/badge/Chrome-grey?style=flat-square)](https://chrome.google.com/webstore/detail/wikipedia-%20/nnkleafalbcmeamobndfmcjhphipnnaj)
+- [![More downloads](https://img.shields.io/badge/Download-grey?style=flat-square)](https://github.com/pigeonposse/wikipediaplus/releases/latest)
 
 ## 👨‍💻 Development
 
