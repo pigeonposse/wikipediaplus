@@ -80,14 +80,15 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           tag: "${{ steps.pkg.outputs.version }}"
-          name: 'v${{ steps.pkg.outputs.version }}'
+          name: '${{ steps.pkg.outputs.version }}'
           draft: false
           prerelease: false
           allowUpdates: true
           artifacts: "dist/exts/*"
           body: |
-            # ${{ steps.pkg.outputs.name }} v${{ steps.pkg.outputs.version }}
+            ### ${{ steps.pkg.outputs.name }} v${{ steps.pkg.outputs.version }}
             ${{ steps.pkg.outputs.description }}
+
             ---
             🧩 CHANGELOG: https://github.com/pigeonposse/wikipediaplus/blob/main/CHANGELOG.md
             📜 LICENSE: https://github.com/pigeonposse/wikipediaplus/blob/main/LICENSE

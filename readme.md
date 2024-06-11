@@ -36,7 +36,7 @@ DEVELOPED BY PIGEONPOSSE
 
  -->
 
-# Wikipedia Plus _Chrome, Safari & Browser Extension_
+# Wikipedia Plus Extension _(Chrome, Safari, Firefox, Brave etc)_
 
 ![HEADER Wikipedia Plus](docs/banner.png)
 
