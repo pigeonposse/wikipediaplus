@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "gruntfuggly.todo-tree",
+        "shd101wyy.markdown-preview-enhanced",
+        "dbaeumer.vscode-eslint",
+        "christian-kohler.npm-intellisense",
+        "jacano.vscode-pnpm",
+        "redhat.vscode-yaml",
+    ]
+}

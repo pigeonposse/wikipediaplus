@@ -1,9 +1,11 @@
 /**
- * Do function.
+ * Content script.
  *
- * @description Kddk.
+ * @description File that will be used as a content script.
+ * @example init()
  *
  * @version 1.0.0
+ *
  */
 async function init() {
 
