@@ -27,6 +27,8 @@ on:
 jobs:
   release_exts:
     name: 🚀🧩 Release extensions
+    # for the Safari build. If set to 'macos-13-xlarge' or 'macos-latest' safari build it will not be compatible with macos Intel processor
+    # @see https://github.com/actions/runner-images?tab=readme-ov-file#available-images
     runs-on: macos-13
     permissions:
       contents: write
