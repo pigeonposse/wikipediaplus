@@ -1,6 +1,6 @@
 
 const pkg = require( './package.json' )
-
+pkg.keywords = pkg.keywords.slice(0, 19)
 const topics = pkg.keywords.join( ',' )
 
 module.exports = {
