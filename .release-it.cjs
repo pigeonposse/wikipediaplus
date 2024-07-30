@@ -1,3 +1,10 @@
+/**
+ * Release it.
+ *
+ * @description Release it.
+ * @see https://github.com/release-it/release-it
+ */
+
 module.exports = {
 	'plugins' : {
 		'@release-it/bumper' : {
@@ -16,7 +23,7 @@ module.exports = {
 		'commitMessage' : ':construction_worker: build(lib): Release v${version}',
 	},
 	'hooks' : {
-		'before:init'       : [ 'pnpm pes lint-fix', 'pnpm gh-update' ],
+		'before:init'       : [ 'pnpm lint-fix', 'pnpm gh-update' ],
 	    'after:bump'        : 'pnpm auto-changelog -p',
 	    'after:git:release' : 'echo \'After git push, before github release\'',
 		'after:release': [
