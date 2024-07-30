@@ -129,7 +129,7 @@ jobs:
           refresh-token: '${{ secrets.CHOME_EXTENSION_REFRESH_TOKEN }}'
           client-id: '${{ secrets.CHOME_EXTENSION_CLIENT_ID }}'
           client-secret: '${{ secrets.CHOME_EXTENSION_CLIENT_SECRET }}'
-          zip-path: dist/exts/${{ steps.pkg.outputs.id }}-chrome.zip
+          zip-path: dist/exts/${{ steps.pkg.outputs.name }}-chrome.zip
           extension-id: '${{steps.pkg.outputs.chrome_store_id}}'
         continue-on-error: true
 
