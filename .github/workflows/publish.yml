@@ -113,7 +113,7 @@ jobs:
         uses: trmcnvn/firefox-addon@v1
         with:
            uuid: ${{ steps.pkg.outputs.firefox_store_id }}
-           xpi: dist/comp/firefox-${{ steps.pkg.outputs.id }}-${{ steps.pkg.outputs.version }}.zip
+           xpi: dist/comp/firefox-${{ steps.pkg.outputs.name }}-${{ steps.pkg.outputs.version }}.zip
            manifest: dist/firefox/manifest.json
            api-key: ${{ secrets.FIREFOX_API_KEY }}
            api-secret: ${{ secrets.FIREFOX_API_SECRET }}
