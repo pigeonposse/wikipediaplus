@@ -144,7 +144,7 @@ jobs:
           client-id: ${{ secrets.EDGE_CLIENT_ID }}
           client-secret: ${{ secrets.EDGE_CLIENT_SECRET }}
           access-token-url: ${{ secrets.EDGE_ACCESS_TOKEN_URL }}
-          zip-path: dist/exts/${{ steps.pkg.outputs.name }}-edge.zip"
+          zip-path: dist/exts/${{ steps.pkg.outputs.name }}-edge.zip
         continue-on-error: true
 
 
