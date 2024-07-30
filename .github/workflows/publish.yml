@@ -1,8 +1,8 @@
 ###############################################################################
-# RELEASE EXTENSIONS
+# PLBLISH CHROME EXTENSION AND FIREFOX EXTENSION
 ###############################################################################
 
-name: 🚀🧩 Release extensions
+name: Publish
 
 
 ###############################################################################
@@ -25,16 +25,23 @@ on:
 ###############################################################################
 
 jobs:
-  release_exts:
-    name: 🚀🧩 Release extensions
+
+  build:
+
+    name: Publish web extensions and release in Github
     # for the Safari build. If set to 'macos-13-xlarge' or 'macos-latest' safari build it will not be compatible with macos Intel processor
     # @see https://github.com/actions/runner-images?tab=readme-ov-file#available-images
     runs-on: macos-13
     permissions:
       contents: write
+
+    ###########################################################################
+    # STEPS
+    ###########################################################################
+
     steps:
 
-      #########################################################################
+     #########################################################################
       # INIT
       #########################################################################
 
@@ -62,7 +69,7 @@ jobs:
         run: pnpm build
 
 
-      #########################################################################
+     #########################################################################
       # GET PKG INFO
       #########################################################################
 
@@ -72,7 +79,9 @@ jobs:
           echo "description=$(jq -r '.description' ./package.json)" >> $GITHUB_OUTPUT
           echo "name=$(jq -r '.name' ./package.json)" >> $GITHUB_OUTPUT
           echo "version=$(jq -r '.version' ./package.json)" >> $GITHUB_OUTPUT 
-
+          echo "firefox_store_id=$(jq -r '.extra.releases.firefox.storeId' ./package.json)" >> $GITHUB_OUTPUT
+          echo "chrome_store_id=$(jq -r '.extra.releases.chrome.storeId' ./package.json)" >> $GITHUB_OUTPUT
+          echo "edge_store_id=$(jq -r '.extra.releases.edge.storeId' ./package.json)" >> $GITHUB_OUTPUT
 
       #########################################################################
       # GITHUB RELEASE
@@ -91,27 +100,51 @@ jobs:
             <p><b> ${{ steps.pkg.outputs.name }} v${{ steps.pkg.outputs.version }}</b></p>
             <p>${{ steps.pkg.outputs.description }}</p>
 
-            🧩 [CHANGELOG]( https://github.com/pigeonposse/wikipediaplus/blob/main/CHANGELOG.md)
-            📜 [LICENSE](https://github.com/pigeonposse/wikipediaplus/blob/main/LICENSE)
-            🔏 [PRIVACY](https://github.com/pigeonposse/wikipediaplus/blob/main/POLICY.md)
+            🧩 [CHANGELOG]( https://github.com/pigeonposse/${{ steps.pkg.outputs.name }}/blob/main/CHANGELOG.md)
+            📜 [LICENSE](https://github.com/pigeonposse/${{ steps.pkg.outputs.name }}/blob/main/LICENSE)
+            🔏 [PRIVACY](https://github.com/pigeonposse/${{ steps.pkg.outputs.name }}/blob/main/POLICY.md)
 
 
+     #########################################################################
+      #  PUBLISH IN FIREFOX WEB STORE
       #########################################################################
-      # FIREFOX
-      #########################################################################
-
+      
       - name: 🧩🦊 Upload FIREFOX extension
         uses: trmcnvn/firefox-addon@v1
         with:
-          # uuid is only necessary when updating an existing addon,
-          # omitting it will create a new addon
-          uuid: '{a2e191e8-b8eb-490b-b282-9f3d2c0332bf}'
-          xpi: dist/comp/firefox-${{ steps.pkg.outputs.name }}-${{ steps.pkg.outputs.version }}.zip
-          manifest: dist/firefox/manifest.json
-          # get keys in:
-          # https://addons.mozilla.org/en-US/developers/addon/api/key/
-          api-key: ${{ secrets.FIREFOX_API_KEY }}
-          api-secret: ${{ secrets.FIREFOX_API_SECRET }}
+           uuid: ${{ steps.pkg.outputs.firefox_store_id }}
+           xpi: dist/comp/firefox-${{ steps.pkg.outputs.id }}-${{ steps.pkg.outputs.version }}.zip
+           manifest: dist/firefox/manifest.json
+           api-key: ${{ secrets.FIREFOX_API_KEY }}
+           api-secret: ${{ secrets.FIREFOX_API_SECRET }}
+        continue-on-error: true
+
+      #########################################################################
+      #  PUBLISH IN CHROME WEB STORE
+      #########################################################################
+
+      - name: 🧩 Upload CHROME extension
+        uses: wdzeng/chrome-extension@v1.2.4
+        with:
+          refresh-token: '${{ secrets.CHOME_EXTENSION_REFRESH_TOKEN }}'
+          client-id: '${{ secrets.CHOME_EXTENSION_CLIENT_ID }}'
+          client-secret: '${{ secrets.CHOME_EXTENSION_CLIENT_SECRET }}'
+          zip-path: dist/exts/${{ steps.pkg.outputs.id }}-chrome.zip
+          extension-id: '${{steps.pkg.outputs.chrome_store_id}}'
+        continue-on-error: true
+
+      #########################################################################
+      # PUBLISH IN EDGE WEB STORE
+      #########################################################################
+
+      - name: 🧩 Upload EDGE extension
+        uses: wdzeng/edge-addon@v1.2.3
+        with:
+          product-id: ${{ steps.pkg.outputs.edge_store_id }}
+          client-id: ${{ secrets.EDGE_CLIENT_ID }}
+          client-secret: ${{ secrets.EDGE_CLIENT_SECRET }}
+          access-token-url: ${{ secrets.EDGE_ACCESS_TOKEN_URL }}
+          zip-path: dist/exts/${{ steps.pkg.outputs.id }}-edge.zip"
         continue-on-error: true
 
 
