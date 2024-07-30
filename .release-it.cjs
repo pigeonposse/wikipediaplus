@@ -11,10 +11,10 @@ module.exports = {
 			],
 		},
 	},
-	// 'git' : {
-	// 	'requireBranch' : 'main',
-	// 	'commitMessage' : ':construction_worker: build(lib): Release v${version}',
-	// },
+	'git' : {
+		'requireBranch' : 'main',
+		'commitMessage' : ':construction_worker: build(lib): Release v${version}',
+	},
 	'hooks' : {
 		'before:init'       : [ 'pnpm pes lint-fix', 'pnpm gh-update' ],
 	    'after:bump'        : 'pnpm auto-changelog -p',
