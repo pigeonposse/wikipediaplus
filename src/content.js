@@ -3,7 +3,6 @@
  *
  * @description File that will be used as a content script.
  * @example init()
- *
  * @version 1.0.0
  *
  */

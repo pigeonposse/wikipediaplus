@@ -54,15 +54,15 @@
 	"type": "module",
 	"scripts": {
 		"build": "pnpm pes build",
-		"dev": "pnpm pres build-c && pnpm pes dev",
+		"dev": "pnpm pes build-c && pnpm pes dev",
 		"lint": "pnpm pes lint",
 		"lint-fix": "pnpm pes lint-fix",
-		"prepare": "husky .dev/husky",
 		"push-main": "pnpm push-origin main",
 		"push-origin": "git add . && pnpm exec cz && git push -f origin $@",
 		"release": "git add . && pnpm exec cz && pnpm release-it",
 		"scripts": "pnpm pes",
-		"start": "echo 'Dev: pnpm pes dev \nBuild: pnpm pes build'"
+		"gh-update": "node .dev/gh-update.cjs",
+		"prepare": "husky .dev/husky"
 	},
 	"commitlint": {
 		"extends": [
