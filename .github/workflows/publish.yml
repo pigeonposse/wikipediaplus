@@ -110,13 +110,12 @@ jobs:
       #########################################################################
       
       - name: 🧩🦊 Upload FIREFOX extension
-        uses: trmcnvn/firefox-addon@v1
+        uses: wdzeng/firefox-addon@v1
         with:
-           uuid: ${{ steps.pkg.outputs.firefox_store_id }}
-           xpi: dist/comp/firefox-${{ steps.pkg.outputs.name }}-${{ steps.pkg.outputs.version }}.zip
-           manifest: dist/firefox/manifest.json
-           api-key: ${{ secrets.FIREFOX_API_KEY }}
-           api-secret: ${{ secrets.FIREFOX_API_SECRET }}
+           addon-guid: ${{ steps.pkg.outputs.firefox_store_id }}
+           xpi-path: dist/comp/firefox-${{ steps.pkg.outputs.name }}-${{ steps.pkg.outputs.version }}.zip
+           jwt-issuer: ${{ secrets.FIREFOX_API_KEY }}
+           jwt-secret: ${{ secrets.FIREFOX_API_SECRET }}
         continue-on-error: true
 
       #########################################################################
@@ -124,7 +123,7 @@ jobs:
       #########################################################################
 
       - name: 🧩 Upload CHROME extension
-        uses: wdzeng/chrome-extension@v1.2.4
+        uses: wdzeng/chrome-extension@v2
         with:
           refresh-token: '${{ secrets.CHOME_EXTENSION_REFRESH_TOKEN }}'
           client-id: '${{ secrets.CHOME_EXTENSION_CLIENT_ID }}'
@@ -138,13 +137,13 @@ jobs:
       #########################################################################
 
       - name: 🧩 Upload EDGE extension
-        uses: wdzeng/edge-addon@v1.2.3
+        uses: wdzeng/edge-addon@v2
         with:
           product-id: ${{ steps.pkg.outputs.edge_store_id }}
           client-id: ${{ secrets.EDGE_CLIENT_ID }}
-          client-secret: ${{ secrets.EDGE_CLIENT_SECRET }}
-          access-token-url: ${{ secrets.EDGE_ACCESS_TOKEN_URL }}
+          api-key: ${{ secrets.EDGE_CLIENT_SECRET }}
           zip-path: dist/exts/${{ steps.pkg.outputs.name }}-edge.zip
+          # access-token-url: ${{ secrets.EDGE_ACCESS_TOKEN_URL }}
         continue-on-error: true
 
 
