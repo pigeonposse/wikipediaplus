@@ -31,7 +31,7 @@ jobs:
     name: Publish web extensions and release in Github
     # for the Safari build. If set to 'macos-13-xlarge' or 'macos-latest' safari build it will not be compatible with macos Intel processor
     # @see https://github.com/actions/runner-images?tab=readme-ov-file#available-images
-    runs-on: macos-13
+    runs-on: macos-15
     permissions:
       contents: write
 
