@@ -59,13 +59,13 @@ async function init() {
 /**
  * Get the page title (as used by the API) from a link.
  *
- * @param {string} href - Link url.
- * @returns {string|null} Page title.
+ * @param   {string}      href - Link url.
+ * @returns {string|null}      - Page title.
  */
 function getPageTitle( href ) {
 
-	var url = new URL( href )
-	var param = url.searchParams.get( 'title' )
+	var url = new URL( href ),
+		param = url.searchParams.get( 'title' )
 
 	if ( param ) return param.replace( /_/g, ' ' )
 	if ( !url.pathname.startsWith( '/wiki/' ) ) return null
@@ -77,14 +77,14 @@ function getPageTitle( href ) {
 /**
  * Limit an extract to its first two paragraphs and a maximum length.
  *
- * @param {string} text - Full extract.
- * @returns {string} Short extract.
+ * @param   {string} text - Full extract.
+ * @returns {string}      - Short extract.
  */
 function shorten( text ) {
 
-	var max = 400
-	var short = text.split( /\n+/ ).filter( Boolean ).slice( 0, 2 ).join( '\n' )
-	var cut
+	var max = 400,
+		short = text.split( /\n+/ ).filter( Boolean ).slice( 0, 2 ).join( '\n' ),
+		cut
 
 	if ( short.length <= max ) return short
 
@@ -97,27 +97,29 @@ function shorten( text ) {
 /**
  * Query the API for a batch of titles (follows continuation).
  *
- * @param {string[]} titles - Page titles.
- * @returns {Promise<object>} Map of resolved title to info.
+ * @param   {string[]}        titles - Page titles.
+ * @returns {Promise<object>}        - Map of resolved title to info.
  */
 async function fetchChunk( titles ) {
 
-	var base = location.origin + '/w/api.php?action=query&format=json&redirects=1&prop=pageimages|extracts&piprop=thumbnail&pithumbsize=160&pilimit=max&exintro=1&explaintext=1&exsentences=2&exlimit=max&titles=' + encodeURIComponent( titles.join( '|' ) )
-	var pages = {}
-	var map = {}
-	var cont = ''
-	var data, q
+	var base = location.origin + '/w/api.php?action=query&format=json&redirects=1&prop=pageimages|extracts&piprop=thumbnail&pithumbsize=160&pilimit=max&exintro=1&explaintext=1&exsentences=2&exlimit=max&titles=' + encodeURIComponent( titles.join( '|' ) ),
+		pages = {},
+		map   = {},
+		cont  = '',
+		data, q
 
 	do {
 
 		data = await ( await fetch( base + cont ) ).json()
-		q = data.query || {}
+		q    = data.query || {}
 
 		; ( q.normalized || [] ).concat( q.redirects || [] ).forEach( m => map[m.from] = m.to )
 
 		Object.values( q.pages || {} ).forEach( p => {
 
-			var cur = pages[p.title] || ( pages[p.title] = { name: p.title, extract: '', image: '' } )
+			var cur = pages[p.title] || ( pages[p.title] = {
+				name : p.title, extract : '', image : '', 
+			} )
 
 			if ( p.thumbnail ) cur.image = p.thumbnail.source
 			if ( p.extract ) cur.extract = shorten( p.extract )
@@ -148,13 +150,15 @@ async function fetchChunk( titles ) {
  */
 async function loadAll( pills ) {
 
-	var size = 20
-	var i, chunk, titles, pages
+	var size = 20,
+		i, chunk, titles, pages
 
 	for ( i = 0; i < pills.length; i += size ) {
 
-		chunk = pills.slice( i, i + size ).filter( p => p.title )
-		titles = [ ...new Set( chunk.map( p => p.title ) ) ]
+		chunk  = pills.slice( i, i + size ).filter( p => p.title )
+		titles = [
+			...new Set( chunk.map( p => p.title ) ), 
+		]
 
 		if ( !titles.length ) continue
 
@@ -174,18 +178,19 @@ async function loadAll( pills ) {
 
 }
 
+// eslint-disable-next-line vars-on-top
 var popup
 
 /**
  * Show a short popup with the page extract under a pill.
  *
- * @param {HTMLElement} btn - Pill link.
- * @param {string} text - Popup text.
+ * @param {HTMLElement} btn  - Pill link.
+ * @param {string}      text - Popup text.
  */
 function showPopup( btn, text ) {
 
-	var r = btn.getBoundingClientRect()
-	var left
+	var r = btn.getBoundingClientRect(),
+		left
 
 	if ( !popup ) {
 
@@ -195,28 +200,28 @@ function showPopup( btn, text ) {
 
 	}
 
-	popup.innerText = text
+	popup.innerText     = text
 	popup.style.display = 'block'
 
 	left = Math.min( Math.max( 8, r.left ), window.innerWidth - popup.offsetWidth - 8 )
 
 	popup.style.left = left + 'px'
-	popup.style.top = ( r.bottom + 8 ) + 'px'
+	popup.style.top  = ( r.bottom + 8 ) + 'px'
 
 }
 
 /**
  * Build the pill content.
  *
- * @param {HTMLElement} btn - Pill link.
- * @param {string} text - Link text.
- * @returns {object} Pill with its title and an apply function.
+ * @param   {HTMLElement} btn  - Pill link.
+ * @param   {string}      text - Link text.
+ * @returns {object}           - Pill with its title and an apply function.
  */
 function buildPill( btn, text ) {
 
-	var nameEl = document.createElement( 'span' )
-	var img = document.createElement( 'img' )
-	var extract = ''
+	var nameEl = document.createElement( 'span' ),
+		img     = document.createElement( 'img' ),
+		extract = ''
 
 	nameEl.classList.add( 'pigeon-w-name' )
 	img.classList.add( 'pigeon-w-img' )
@@ -249,7 +254,7 @@ function buildPill( btn, text ) {
 		apply : data => {
 
 			nameEl.innerText = data.name
-			extract = data.extract
+			extract          = data.extract
 
 			if ( data.image ) {
 
