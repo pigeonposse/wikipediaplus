@@ -8,6 +8,8 @@
 	-webkit-overflow-scrolling: touch;
 	border-bottom: 1px solid #a2a9b1;
 	padding: 9px 0;
+	min-height: 54px;
+	align-items: center;
 }
 
 .slides::-webkit-scrollbar-track,
@@ -27,6 +29,7 @@
 	scroll-snap-align: start;
 	flex-shrink: 0;
 	height: 30px;
+	transition: height .2s ease;
 	margin: 0 3px;
 	position: relative;
 	display: flex;
@@ -91,3 +94,78 @@
 	}
 }
 
+
+
+/* Hover: pill grows 20% and shows the page image */
+.slides > div:hover {
+	height: 36px;
+}
+
+.slides a {
+	gap: 8px;
+	transition: padding .2s ease, background .2s, border-radius .2s;
+}
+
+.pigeon-w-name {
+	white-space: nowrap;
+}
+
+.pigeon-w-img {
+	display: none;
+}
+
+.slides a:hover {
+	border-radius: 12px;
+}
+
+.slides a:hover.pigeon-w-has-img {
+	padding: 0 4px 0 15px;
+}
+
+.slides a:hover.pigeon-w-has-img .pigeon-w-img {
+	display: block;
+	flex-shrink: 0;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 2px solid #fff;
+	box-sizing: border-box;
+}
+
+.pigeon-w-popup {
+	display: none;
+	position: fixed;
+	z-index: 10000;
+	max-width: 320px;
+	max-height: 60vh;
+	overflow: hidden;
+	padding: 10px 12px;
+	background: #fff;
+	color: #202122;
+	border: 1px solid #a2a9b1;
+	border-radius: 8px;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
+	font-size: 13px;
+	line-height: 1.4;
+	pointer-events: none;
+}
+
+/* Dark mode (Wikipedia's night theme, or OS dark when set to automatic) */
+.skin-theme-clientpref-night .pigeon-w-popup {
+	background: #101418;
+	color: #eaecf0;
+	border-color: #3a3f47;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, .6);
+}
+
+@media (prefers-color-scheme: dark) {
+
+	.skin-theme-clientpref-os .pigeon-w-popup {
+		background: #101418;
+		color: #eaecf0;
+		border-color: #3a3f47;
+		box-shadow: 0 4px 14px rgba(0, 0, 0, .6);
+	}
+
+}
