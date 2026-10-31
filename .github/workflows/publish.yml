@@ -125,12 +125,12 @@ jobs:
       - name: 🧩 Upload CHROME extension
         uses: wdzeng/chrome-extension@v2
         with:
-          refresh-token: '${{ secrets.CHOME_EXTENSION_REFRESH_TOKEN }}'
+          extension-id: '${{steps.pkg.outputs.chrome_store_id}}'
+          zip-path: dist/exts/${{ steps.pkg.outputs.name }}-chrome.zip
           publisher-id: '${{ secrets.CHROME_EXTENSION_PUBLISHER_ID }}'
           client-id: '${{ secrets.CHOME_EXTENSION_CLIENT_ID }}'
           client-secret: '${{ secrets.CHOME_EXTENSION_CLIENT_SECRET }}'
-          zip-path: dist/exts/${{ steps.pkg.outputs.name }}-chrome.zip
-          extension-id: '${{steps.pkg.outputs.chrome_store_id}}'
+          refresh-token: '${{ secrets.CHOME_EXTENSION_REFRESH_TOKEN }}'
         continue-on-error: true
 
       #########################################################################
