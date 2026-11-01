@@ -164,9 +164,9 @@
 				"id": "edge",
 				"name": "Edge extension",
 				"logo": "microsoftedge",
-				"url": "https://microsoftedge.microsoft.com/addons/detail/{coming}",
+				"url": "https://microsoftedge.microsoft.com/addons/detail/0RDCKDR056MF",
 				"store": true,
-				"storeId": "{coming}",
+				"storeId": "0RDCKDR056MF",
 				"type": "extension"
 			},
 			"edgeMv2": {
