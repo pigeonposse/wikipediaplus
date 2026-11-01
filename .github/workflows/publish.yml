@@ -130,7 +130,7 @@ jobs:
           publisher-id: '${{ secrets.CHROME_EXTENSION_PUBLISHER_ID }}'
           client-id: '${{ secrets.CHROME_EXTENSION_CLIENT_ID }}'
           client-secret: '${{ secrets.CHROME_EXTENSION_CLIENT_SECRET }}'
-          refresh-token: '${{ secrets.CHOME_EXTENSION_REFRESH_TOKEN }}'
+          refresh-token: '${{ secrets.CHROME_EXTENSION_REFRESH_TOKEN }}'
         continue-on-error: true
 
       #########################################################################
